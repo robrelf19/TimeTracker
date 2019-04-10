@@ -23,6 +23,10 @@ namespace TimeTracker
         public MainWindow()
         {
             InitializeComponent();
+            Left = System.Windows.SystemParameters.WorkArea.Right - Width;
+            Top = System.Windows.SystemParameters.WorkArea.Bottom -Height;
+            this.Topmost = true;
         }
+
     }
 }

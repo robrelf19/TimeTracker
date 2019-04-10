@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeTracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="300" Width="50" WindowStartupLocation="Manual" WindowStyle="None">
     <Grid>
+       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
         
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        
+        <Button x:Name="btnNew" Grid.Row="1" Content="New" RenderTransformOrigin="0.5,0.5"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Margin="-15,22,-15,24" Width="80" Background="#FF06780B">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="btnCloseAll" Grid.Row="3" Content="Save &amp; Close All" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-56,68,-56,38" Width="153" Height="35" FontSize="18" Background="#FFF1151F">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>
