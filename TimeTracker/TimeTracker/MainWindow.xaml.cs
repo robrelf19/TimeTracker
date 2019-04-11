@@ -20,12 +20,19 @@ namespace TimeTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow AppWindow;
+
+        public int counter = 1;
+        public List<Window> windowList = new List<Window>();
+
         public MainWindow()
         {
             InitializeComponent();
             Left = System.Windows.SystemParameters.WorkArea.Right - Width;
             Top = System.Windows.SystemParameters.WorkArea.Bottom -Height;
             this.Topmost = true;
+            AppWindow = this;
+            windowList.Add(this);
         }
 
     }
