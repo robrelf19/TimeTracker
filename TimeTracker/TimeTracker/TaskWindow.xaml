@@ -23,9 +23,9 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="txtTaskName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Text="Task Name" Margin="0,0,0,5"/>
         <Button x:Name="btnStart" Grid.Column="1" Grid.Row="2" Content="START" Margin="0,0,0,5" Click="BtnStart_Click"/>
-        <Button x:Name="btnStop" Grid.Column="1" Grid.Row="3" Content="STOP" Margin="0,0,0,5"/>
-        <Button x:Name="btnReset" Grid.Column="1" Grid.Row="4" Content="RESET" Margin="0,0,0,5"/>
-        <TextBox x:Name="txtTime" Grid.Column="1" Grid.Row="5" Text="0.00.00" Height="40" HorizontalAlignment="Left" FontSize="36" Margin="1,0,0,5"/>
+        <Button x:Name="btnStop" Grid.Column="1" Grid.Row="3" Content="STOP/PAUSE" Margin="0,0,0,5" Click="BtnStop_Click"/>
+        <Button x:Name="btnReset" Grid.Column="1" Grid.Row="4" Content="RESET" Margin="0,0,0,5" Click="BtnReset_Click"/>
+        <TextBox x:Name="txtTime" Grid.Column="1" Grid.Row="5" Text="0.00.00" Height="40" HorizontalAlignment="Center" FontSize="24" Margin="1,0,0,5" VerticalAlignment="Bottom"/>
         <Button x:Name="btnSave" Grid.Column="1" Grid.Row="6" Content="SAVE &amp; CLOSE" Margin="0,0,0,5"/>
     </Grid>
 </Window>

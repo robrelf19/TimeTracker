@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -13,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Reflection;
+using System.Timers;
+
 
 
 
@@ -20,25 +21,48 @@ namespace TimeTracker
 {
     public partial class TaskWindow : Window
     {
-        private Timer timer;
+
+        DispatcherTimer timer = new DispatcherTimer();
         private DateTime startTime = DateTime.MinValue;
-        private TimeSpan totalElapsedTime = TimeSpan.Zero;
+        private TimeSpan totalElapseTime = TimeSpan.Zero;
         private bool timerRunning = false;
         private TimeSpan elapsedTimeAtPause = TimeSpan.Zero;
         private bool timePause = false;
-        
+
+
         public TaskWindow()
         {
             InitializeComponent();
-            timer = new System.Timers.Timer();
-            
+            this.Show();
+            Left = SystemParameters.WorkArea.Right - (Width * TimeTracker.MainWindow.AppWindow.counter);
+            Top = SystemParameters.WorkArea.Bottom - Height;
+            this.Topmost = true;
+
+
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timerTick;
+        }
+
+        //Wrote this in the btnStart method by mistake. Should go in the New button event on Main
+        //TimeTracker.MainWindow.AppWindow.counter++;
+        //            TimeTracker.MainWindow.AppWindow.windowList.Add(this);
+        //            this.Show();
+        //Left = System.Windows.SystemParameters.WorkArea.Right - (Width * TimeTracker.MainWindow.AppWindow.counter);
+        //Top = System.Windows.SystemParameters.WorkArea.Bottom - Height;
+        //            this.Topmost = true;
+
+
+        private void timerTick(object sender, EventArgs e)
+        {
+            totalElapseTime = DateTime.Now - startTime + elapsedTimeAtPause;
+            txtTime.Text = totalElapseTime.ToString("hh':'mm':'ss");
         }
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             if (timePause)
             {
-                startTime = DateTime.Now - elapsedTimeAtPause; //if starting from a paused state, add back the time saved at paused
+                startTime = DateTime.Now - elapsedTimeAtPause; //if starting from a paused state, add back the elapsed time saved during the pause
                 elapsedTimeAtPause = TimeSpan.Zero;
             }
             else
@@ -46,15 +70,37 @@ namespace TimeTracker
                 startTime = DateTime.Now;
             }
 
+            timerRunning = true;
+            timer.Start();
+            timePause = false;
 
+            btnStop.IsEnabled = true;
+            btnReset.IsEnabled = false;
+            btnStart.IsEnabled = false;
+            btnSave.IsEnabled = false;
+        }
+
+        private void BtnStop_Click(object sender, RoutedEventArgs e)
+        {
+            elapsedTimeAtPause = totalElapseTime; //store the amount of time that has been accrued
+            timer.Stop();
+            timerRunning = false;
+            timePause = true;
+
+            btnStop.IsEnabled = false;
+            btnStart.IsEnabled = true;
+            btnReset.IsEnabled = true;
+            btnSave.IsEnabled = true;
+        }
+
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            elapsedTimeAtPause = TimeSpan.Zero;
+            totalElapseTime = TimeSpan.Zero;
+            timePause = false;
+            txtTime.Text = totalElapseTime.ToString("h':'m':'s");
         }
     }
 }
 
-//Wrote this in the btnStart method by mistake.
-//TimeTracker.MainWindow.AppWindow.counter++;
-//            TimeTracker.MainWindow.AppWindow.windowList.Add(this);
-//            this.Show();
-//Left = System.Windows.SystemParameters.WorkArea.Right - (Width * TimeTracker.MainWindow.AppWindow.counter);
-//Top = System.Windows.SystemParameters.WorkArea.Bottom - Height;
-//            this.Topmost = true;
+

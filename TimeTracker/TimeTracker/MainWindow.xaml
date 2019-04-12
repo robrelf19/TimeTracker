@@ -20,7 +20,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         
-        <Button x:Name="btnNew" Grid.Row="1" Content="New" RenderTransformOrigin="0.5,0.5"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Margin="-15,22,-15,24" Width="80" Background="#FF06780B">
+        <Button x:Name="btnNew" Grid.Row="1" Content="New" RenderTransformOrigin="0.5,0.5"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Margin="-15,22,-15,24" Width="80" Background="#FF06780B" Click="BtnNew_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

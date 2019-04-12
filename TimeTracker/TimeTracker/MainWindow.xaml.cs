@@ -28,12 +28,18 @@ namespace TimeTracker
         public MainWindow()
         {
             InitializeComponent();
-            Left = System.Windows.SystemParameters.WorkArea.Right - Width;
-            Top = System.Windows.SystemParameters.WorkArea.Bottom -Height;
+            Left = SystemParameters.WorkArea.Right - Width;
+            Top = SystemParameters.WorkArea.Bottom -Height;
             this.Topmost = true;
             AppWindow = this;
             windowList.Add(this);
         }
 
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+            counter++;
+            TaskWindow taskWindow = new TaskWindow();
+            windowList.Add(taskWindow);
+        }
     }
 }
