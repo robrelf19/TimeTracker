@@ -22,17 +22,17 @@ namespace TimeTracker
     {
         public static MainWindow AppWindow;
 
-        public int counter = 1;
+        public int counter = -1;
         public List<Window> windowList = new List<Window>();
 
         public MainWindow()
         {
             InitializeComponent();
-            Left = SystemParameters.WorkArea.Right - Width;
+            Left = SystemParameters.WorkArea.Right - 50;
             Top = SystemParameters.WorkArea.Bottom -Height;
             this.Topmost = true;
             AppWindow = this;
-            windowList.Add(this);
+            
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
@@ -40,6 +40,21 @@ namespace TimeTracker
             counter++;
             TaskWindow taskWindow = new TaskWindow();
             windowList.Add(taskWindow);
+        }
+
+        public void ResetTaskWindowPositions()
+        {
+            if(counter > 0)
+            {
+                for (int i = 0; i < counter; i++)
+                {
+                    windowList[i].Left = SystemParameters.WorkArea.Right - 50 - (150 * counter);
+                }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
