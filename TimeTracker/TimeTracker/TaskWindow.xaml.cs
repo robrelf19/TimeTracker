@@ -19,6 +19,7 @@ namespace TimeTracker
 {
     public partial class TaskWindow : Window
     {
+        public static TaskWindow taskWindow;
 
         DispatcherTimer timer = new DispatcherTimer();
         private DateTime startTime = DateTime.MinValue;
@@ -26,29 +27,32 @@ namespace TimeTracker
         private bool timerRunning = false;
         private TimeSpan elapsedTimeAtPause = TimeSpan.Zero;
         private bool timePause = false;
-        private int instanceIndex;
+        public Guid oid = Guid.NewGuid();
 
 
         public TaskWindow()
         {
             InitializeComponent();
             this.Show();
-            Left = SystemParameters.WorkArea.Right - 50 - (Width * (TimeTracker.MainWindow.AppWindow.counter + 1));
+            Left = SystemParameters.WorkArea.Right - 50 - (Width * (TimeTracker.MainWindow.AppWindow.windowList.Count + 1));
             Top = SystemParameters.WorkArea.Bottom - Height;
             this.Topmost = true;
 
-            instanceIndex = MainWindow.AppWindow.counter;
+            taskWindow = this;
 
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += timerTick;
+            timer.Tick += TimerTick;
+
+            txtCounterInstance.Text = $"Oid: {oid.ToString()}";
         }
 
 
 
-        private void timerTick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             totalElapseTime = DateTime.Now - startTime + elapsedTimeAtPause;
             txtTime.Text = totalElapseTime.ToString("hh':'mm':'ss");
+            
         }
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
@@ -96,24 +100,17 @@ namespace TimeTracker
 
         private void TaskWindowClosing(object sender, CancelEventArgs e)
         {
-            if (MainWindow.AppWindow.counter > 0)
+            bool cancel = MainWindow.AppWindow.ResetTaskWindowPositions(oid);
+            if (cancel == true)
             {
-
-                MainWindow.AppWindow.windowList.RemoveAt(instanceIndex);
-                MainWindow.AppWindow.counter--;
-                MessageBox.Show($"Counter: {MainWindow.AppWindow.counter.ToString()}, Instance ID: {instanceIndex}");
-                MainWindow.AppWindow.ResetTaskWindowPositions();
+                e.Cancel = true;
             }
 
         }
+
     }
 }
 
-//Wrote this in the btnStart method by mistake. Should go in the New button event on Main
-//TimeTracker.MainWindow.AppWindow.counter++;
-//            TimeTracker.MainWindow.AppWindow.windowList.Add(this);
-//            this.Show();
-//Left = System.Windows.SystemParameters.WorkArea.Right - (Width * TimeTracker.MainWindow.AppWindow.counter);
-//Top = System.Windows.SystemParameters.WorkArea.Bottom - Height;
-//            this.Topmost = true;
+
+
 
