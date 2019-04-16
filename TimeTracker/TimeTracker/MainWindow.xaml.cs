@@ -42,11 +42,20 @@ namespace TimeTracker
             windowList.Add(taskWindow);
         }
 
-        public bool ResetTaskWindowPositions(Guid taskWindowOid)
+        public void ResetTaskWindowPositions(Guid taskWindowOid)
         {
-            int index = windowList.FindIndex(x => TaskWindow.taskWindow.oid == taskWindowOid);
+            //foreach (TaskWindow tw in windowList)
+            //{
+            //    if(tw.TaskWindowGuid == taskWindowOid)
+            //    {
+            //        windowList.Remove(tw);
+            //    }
+            //}
 
-            windowList.RemoveAt(index);
+
+            //int index = windowList.FindIndex(x => TaskWindow.taskWindow.TaskWindowGuid == taskWindowOid);
+
+            //windowList.RemoveAt(index);
 
             int counter = 0;
             foreach (TaskWindow item in windowList)
@@ -55,7 +64,7 @@ namespace TimeTracker
                 counter++;
             }
 
-            return false;
+
         }
     }
 }

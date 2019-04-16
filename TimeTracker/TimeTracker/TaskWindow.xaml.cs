@@ -27,7 +27,7 @@ namespace TimeTracker
         private bool timerRunning = false;
         private TimeSpan elapsedTimeAtPause = TimeSpan.Zero;
         private bool timePause = false;
-        public Guid oid = Guid.NewGuid();
+        public Guid TaskWindowGuid { get; set; }
 
 
         public TaskWindow()
@@ -43,10 +43,12 @@ namespace TimeTracker
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
 
-            txtCounterInstance.Text = $"Oid: {oid.ToString()}";
+            txtCounterInstance.Text = $"Oid: {TaskWindowGuid.ToString()}";
+
+            TaskWindowGuid = Guid.NewGuid();
+
+            //            
         }
-
-
 
         private void TimerTick(object sender, EventArgs e)
         {
@@ -98,16 +100,17 @@ namespace TimeTracker
             txtTime.Text = totalElapseTime.ToString("h':'m':'s");
         }
 
-        private void TaskWindowClosing(object sender, CancelEventArgs e)
+        private void TaskWindow_Closing(object sender, CancelEventArgs e)
         {
-            bool cancel = MainWindow.AppWindow.ResetTaskWindowPositions(oid);
-            if (cancel == true)
-            {
-                e.Cancel = true;
-            }
-
+            //e.Cancel = true;
+            MainWindow.AppWindow.ResetTaskWindowPositions(TaskWindowGuid);
+            //CloseCurrentWindow();
         }
 
+        private void CloseCurrentWindow()
+        {
+            this.Close();
+        }
     }
 }
 
