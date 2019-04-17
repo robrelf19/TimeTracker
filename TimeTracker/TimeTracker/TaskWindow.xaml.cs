@@ -24,17 +24,16 @@ namespace TimeTracker
         DispatcherTimer timer = new DispatcherTimer();
         private DateTime startTime = DateTime.MinValue;
         private TimeSpan totalElapseTime = TimeSpan.Zero;
-        private bool timerRunning = false;
+        //private bool timerRunning = false;
         private TimeSpan elapsedTimeAtPause = TimeSpan.Zero;
         private bool timePause = false;
-        public Guid TaskWindowGuid { get; set; }
-
-
+        
         public TaskWindow()
         {
             InitializeComponent();
             this.Show();
-            Left = SystemParameters.WorkArea.Right - 50 - (Width * (TimeTracker.MainWindow.AppWindow.windowList.Count + 1));
+
+            Left = SystemParameters.WorkArea.Right - (MainWindow.AppWindow.Width + (Width * (MainWindow.AppWindow.windowList.Count + 1)));
             Top = SystemParameters.WorkArea.Bottom - Height;
             this.Topmost = true;
 
@@ -42,19 +41,12 @@ namespace TimeTracker
 
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
-
-            txtCounterInstance.Text = $"Oid: {TaskWindowGuid.ToString()}";
-
-            TaskWindowGuid = Guid.NewGuid();
-
-            //            
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
             totalElapseTime = DateTime.Now - startTime + elapsedTimeAtPause;
             txtTime.Text = totalElapseTime.ToString("hh':'mm':'ss");
-            
         }
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
@@ -69,7 +61,7 @@ namespace TimeTracker
                 startTime = DateTime.Now;
             }
 
-            timerRunning = true;
+            //timerRunning = true;
             timer.Start();
             timePause = false;
 
@@ -83,7 +75,7 @@ namespace TimeTracker
         {
             elapsedTimeAtPause = totalElapseTime; //store the amount of time that has been accrued
             timer.Stop();
-            timerRunning = false;
+            //timerRunning = false;
             timePause = true;
 
             btnStop.IsEnabled = false;
@@ -102,12 +94,11 @@ namespace TimeTracker
 
         private void TaskWindow_Closing(object sender, CancelEventArgs e)
         {
-            //e.Cancel = true;
-            MainWindow.AppWindow.ResetTaskWindowPositions(TaskWindowGuid);
-            //CloseCurrentWindow();
+            MainWindow.AppWindow.windowList.Remove(this);
+            MainWindow.AppWindow.ResetTaskWindowPositions();
         }
 
-        private void CloseCurrentWindow()
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

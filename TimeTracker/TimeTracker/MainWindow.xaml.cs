@@ -15,14 +15,10 @@ using System.Windows.Shapes;
 
 namespace TimeTracker
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public static MainWindow AppWindow;
 
-        //public int counter = -1;
         public List<Window> windowList = new List<Window>();
 
         public MainWindow()
@@ -32,39 +28,22 @@ namespace TimeTracker
             Top = SystemParameters.WorkArea.Bottom -Height;
             this.Topmost = true;
             AppWindow = this;
-            
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-            //counter++;
             TaskWindow taskWindow = new TaskWindow();
             windowList.Add(taskWindow);
         }
 
-        public void ResetTaskWindowPositions(Guid taskWindowOid)
+        public void ResetTaskWindowPositions()
         {
-            //foreach (TaskWindow tw in windowList)
-            //{
-            //    if(tw.TaskWindowGuid == taskWindowOid)
-            //    {
-            //        windowList.Remove(tw);
-            //    }
-            //}
-
-
-            //int index = windowList.FindIndex(x => TaskWindow.taskWindow.TaskWindowGuid == taskWindowOid);
-
-            //windowList.RemoveAt(index);
-
-            int counter = 0;
+            int counter = 1;
             foreach (TaskWindow item in windowList)
             {
-                item.Left = SystemParameters.WorkArea.Right - 50 - (150 * counter);
+                item.Left = SystemParameters.WorkArea.Right - (Width + (100 * counter));
                 counter++;
             }
-
-
         }
     }
 }

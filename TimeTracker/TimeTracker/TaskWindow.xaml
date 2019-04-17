@@ -6,15 +6,16 @@
         xmlns:local="clr-namespace:TimeTracker"
         mc:Ignorable="d"
         Closing="TaskWindow_Closing"
-        Title="TaskWindow" Height="300" Width="150" FontSize="16">
+        WindowStyle="None"
+        Title=" " Height="210" Width="105" FontSize="12">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="5"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -27,8 +28,8 @@
         <Button x:Name="btnStart" Grid.Column="1" Grid.Row="2" Content="START" Margin="0,0,0,5" Click="BtnStart_Click"/>
         <Button x:Name="btnStop" Grid.Column="1" Grid.Row="3" Content="STOP/PAUSE" Margin="0,0,0,5" Click="BtnStop_Click"/>
         <Button x:Name="btnReset" Grid.Column="1" Grid.Row="4" Content="RESET" Margin="0,0,0,5" Click="BtnReset_Click"/>
-        <TextBox x:Name="txtTime" Grid.Column="1" Grid.Row="5" Text="0.00.00" Height="40" HorizontalAlignment="Center" FontSize="24" Margin="1,0,0,5" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtTime" Grid.Column="1" Grid.Row="5" Text="0.00.00" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="0,0,0,5"/>
         <Button x:Name="btnSave" Grid.Column="1" Grid.Row="6" Content="SAVE &amp; CLOSE" Margin="0,0,0,5"/>
-        <TextBox x:Name="txtCounterInstance" Grid.Column="1" Grid.Row="7" FontSize="18" Margin="0,0,0,5"/>
+        <Button x:Name="btnClose" Grid.Column="1" Grid.Row="7" Content="CLOSE" Margin="0,0,0,5" Click="BtnClose_Click"/>
     </Grid>
 </Window>
