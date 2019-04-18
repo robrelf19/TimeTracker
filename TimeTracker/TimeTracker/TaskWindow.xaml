@@ -29,7 +29,7 @@
         <Button x:Name="btnStop" Grid.Column="1" Grid.Row="3" Content="STOP/PAUSE" Margin="0,0,0,5" Click="BtnStop_Click"/>
         <Button x:Name="btnReset" Grid.Column="1" Grid.Row="4" Content="RESET" Margin="0,0,0,5" Click="BtnReset_Click"/>
         <TextBox x:Name="txtTime" Grid.Column="1" Grid.Row="5" Text="0.00.00" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="0,0,0,5"/>
-        <Button x:Name="btnSave" Grid.Column="1" Grid.Row="6" Content="SAVE &amp; CLOSE" Margin="0,0,0,5"/>
+        <Button x:Name="btnSave" Grid.Column="1" Grid.Row="6" Content="SAVE &amp; CLOSE" Margin="0,0,0,5" Click="BtnSave_Click"/>
         <Button x:Name="btnClose" Grid.Column="1" Grid.Row="7" Content="CLOSE" Margin="0,0,0,5" Click="BtnClose_Click"/>
     </Grid>
 </Window>

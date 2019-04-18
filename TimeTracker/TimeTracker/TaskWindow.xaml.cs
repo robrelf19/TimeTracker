@@ -23,8 +23,7 @@ namespace TimeTracker
 
         DispatcherTimer timer = new DispatcherTimer();
         private DateTime startTime = DateTime.MinValue;
-        private TimeSpan totalElapseTime = TimeSpan.Zero;
-        //private bool timerRunning = false;
+        public TimeSpan totalElapseTime = TimeSpan.Zero;
         private TimeSpan elapsedTimeAtPause = TimeSpan.Zero;
         private bool timePause = false;
         
@@ -61,7 +60,6 @@ namespace TimeTracker
                 startTime = DateTime.Now;
             }
 
-            //timerRunning = true;
             timer.Start();
             timePause = false;
 
@@ -75,7 +73,6 @@ namespace TimeTracker
         {
             elapsedTimeAtPause = totalElapseTime; //store the amount of time that has been accrued
             timer.Stop();
-            //timerRunning = false;
             timePause = true;
 
             btnStop.IsEnabled = false;
@@ -101,6 +98,11 @@ namespace TimeTracker
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            NotesWindow notesWindow = new NotesWindow();
         }
     }
 }
