@@ -45,5 +45,22 @@ namespace TimeTracker
                 counter++;
             }
         }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            if (windowList.Count > 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Close all tasks without Saving ?", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+            
+        }
     }
 }

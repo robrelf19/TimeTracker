@@ -19,6 +19,6 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="txtNotes" Grid.Column="1" Grid.Row="1" Height="440" Width="790" FontSize="10" Margin="0,0,0,5" AcceptsReturn="True"/>
-        <Button x:Name="btnNotesSave" Grid.Column="1" Grid.Row="2" Height="40" Width="100" Content="SAVE &amp; CLOSE" Margin="0,0,0,5"/>
+        <Button x:Name="btnNotesSave" Grid.Column="1" Grid.Row="2" Height="40" Width="100" Content="SAVE &amp; CLOSE" Margin="0,0,0,5" Click="BtnNotesSave_Click"/>
     </Grid>
 </Window>

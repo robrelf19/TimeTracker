@@ -31,6 +31,7 @@ namespace TimeTracker
         {
             InitializeComponent();
             this.Show();
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             Left = SystemParameters.WorkArea.Right - (MainWindow.AppWindow.Width + (Width * (MainWindow.AppWindow.windowList.Count + 1)));
             Top = SystemParameters.WorkArea.Bottom - Height;
@@ -89,7 +90,7 @@ namespace TimeTracker
             txtTime.Text = totalElapseTime.ToString("h':'m':'s");
         }
 
-        private void TaskWindow_Closing(object sender, CancelEventArgs e)
+        public void TaskWindow_Closing(object sender, CancelEventArgs e)
         {
             MainWindow.AppWindow.windowList.Remove(this);
             MainWindow.AppWindow.ResetTaskWindowPositions();
